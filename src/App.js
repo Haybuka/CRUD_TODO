@@ -10,7 +10,7 @@ import { ThemeContext } from "./context/ThemeContext";
 function App() {
   const {mode} = useContext(ThemeContext)
   return (
-    <div className='contains '>
+    <div className={mode ? 'contains light':'contains dark'}>
       <TodoFormProvider>
           <div className='w-3/4 md:w-3/5 lg:w-2/5 mx-auto py-3'>
 

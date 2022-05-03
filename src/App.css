@@ -1,12 +1,19 @@
 .contains{
   background-color: rgb(0, 0, 0);
   height: 100vh;
-  background-image: url('./component/todo/images/bg-desktop-dark.jpg');
   background-position: top;
   background-repeat: no-repeat;
  background-size: 100% 32%;
 }
 
+.contains.dark{
+  background-image: url('./component/todo/images/bg-desktop-dark.jpg');
+}
+.contains.light{
+  background-image: url('./component/todo/images/bg-desktop-light.jpg');
+}
 .active{
   color: hsl(220, 98%, 61%);
+  border: none !important;
+  outline: none !important;
 }

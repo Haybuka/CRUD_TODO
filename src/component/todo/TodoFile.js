@@ -60,8 +60,8 @@ export function TodoActions(){
                    <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : 'inactive hover:text-white')}>
                       <p >All</p>    
                    </NavLink>
-                   <NavLink to="active" className={({ isActive }) => (isActive ? 'active' : 'inactive hover:text-white')}>
-                     <p onClick={()=>activeTodo(todos)} className='cursor-pointer mx-4 md:mx-6 inline-block'>Active</p>
+                   <NavLink to="active" className={({ isActive }) => (isActive ? 'active' : 'inactive hover:text-white ')}>
+                     <p onClick={()=>activeTodo(todos)} className='cursor-pointer mx-6 md:mx-6 inline-block'>Active</p>
                    </NavLink>
                    <NavLink to="completed" className={({ isActive }) => (isActive ? 'active' : 'inactive hover:text-white')}>
                      <p onClick={()=>completedTodo(todos)}>Completed</p>
