@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useContext} from "react";
+import Todo from "./component/todo/Todo";
+import { TodoFormProvider } from "./context/TodoFormContext";
+import { TodoActions, TodoListItem,TodoForm,ActiveTodo,CompletedTodo } from "./component/todo/TodoFile";
+// import UseReduce from "./component/reducer/UseReduce";
+import { Routes,Route } from "react-router-dom";
+import Header from "./component/todo/Header";
+import './App.css'
+import { ThemeContext } from "./context/ThemeContext";
 function App() {
+  const {mode} = useContext(ThemeContext)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='contains '>
+      <TodoFormProvider>
+          <div className='w-3/4 md:w-3/5 lg:w-2/5 mx-auto py-3'>
+
+             <Header />
+             <main>
+             <TodoForm />
+
+                <Routes>
+                   <Route path="/" element={<TodoListItem />}/>
+                   <Route path="active" element={<ActiveTodo />}/>
+                   <Route path="completed" element={<CompletedTodo />}/>
+   
+                </Routes>
+             </main>
+         <TodoActions />
+
+         </div>
+      </TodoFormProvider>
+    
+      
     </div>
   );
 }
