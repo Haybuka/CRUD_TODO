@@ -1,8 +1,10 @@
-/* .TodoList li:last-child{
-    border: none;
-} */
+
+.TodoList{
+    @apply rounded-t-md mt-3 ;
+}
+
 .TodoList li{
-    border-bottom: 2px solid hsl(237, 14%, 26%);
+    border-bottom: 2px solid  hsla(236.8, 14.3%, 26.1%, 0.44);
 }
 .TodoList li:hover .checked-incomplete{
   border-top:  1px solid hsl(192, 100%, 67%);

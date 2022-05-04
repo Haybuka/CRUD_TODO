@@ -1,0 +1,12 @@
+.TodoActive{
+    @apply rounded-t-md mt-3 ;
+}
+.light-active{
+    @apply bg-white text-gray-800 ;
+}
+.dark-active{
+    @apply bg-gray-800 text-white;
+}
+.TodoActive li{
+    border-bottom: 2px solid hsl(237, 14%, 26%);
+}

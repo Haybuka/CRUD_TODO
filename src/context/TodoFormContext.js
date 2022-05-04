@@ -12,7 +12,7 @@ export function TodoFormProvider({children}) {
     
     function handleSetTodo(todoInput,checker,id){
      
-      setTodos([...todos, {item:todoInput, completed : checker, id}])
+      setTodos([{item:todoInput, completed : checker, id},...todos ])
     
     }
 

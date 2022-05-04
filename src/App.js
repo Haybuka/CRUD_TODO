@@ -12,7 +12,7 @@ function App() {
   return (
     <div className={mode ? 'contains light':'contains dark'}>
       <TodoFormProvider>
-          <div className='w-3/4 md:w-3/5 lg:w-2/5 mx-auto py-3'>
+          <div className='Todo'>
 
              <Header />
              <main>
@@ -26,10 +26,10 @@ function App() {
                 </Routes>
              </main>
          <TodoActions />
-
+             
          </div>
       </TodoFormProvider>
-    
+      <p className="font-sm text-gray-700 opacity-60 text-center mt-4">Drag and drop to reorder list</p>
       
     </div>
   );

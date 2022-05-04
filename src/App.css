@@ -1,5 +1,4 @@
 .contains{
-  background-color: rgb(0, 0, 0);
   height: 100vh;
   background-position: top;
   background-repeat: no-repeat;
@@ -8,12 +7,32 @@
 
 .contains.dark{
   background-image: url('./component/todo/images/bg-desktop-dark.jpg');
+  background-color: rgb(0, 0, 0);
+
 }
 .contains.light{
   background-image: url('./component/todo/images/bg-desktop-light.jpg');
+  background-color: rgb(255, 255, 255);
+
 }
 .active{
   color: hsl(220, 98%, 61%);
   border: none !important;
   outline: none !important;
+}
+.inactive:active{
+    border: none;
+    outline:none;
+}
+
+
+.Todo{
+  @apply w-3/4 md:w-3/5 lg:w-2/5 mx-auto py-3;
+}
+
+.contains.light main{
+  @apply shadow-md;
+}
+.contains.light footer{
+  @apply shadow-md;
 }

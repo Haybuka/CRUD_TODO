@@ -4,12 +4,15 @@ import {v4 as uuid} from 'uuid'
 import './TodoForm.css'
 import './TodoList.css'
 import './TodoActions.css'
+import './TodoComplete.css'
+import './TodoActive.css'
 import { NavLink } from 'react-router-dom'
-
+import { ThemeContext } from '../../context/ThemeContext'
 //Form to add to list item
 export function TodoForm() {
  
   const {handleSetTodo} = useContext(formContext)
+  const {mode} = useContext(ThemeContext)
   let [todoInput,setTodoInput] = useState('')
   let [checker,setChecker] = useState(false)
   const handleSubmit = (e,todoInput,checker) =>{
@@ -19,7 +22,7 @@ export function TodoForm() {
     setTodoInput('')
   } 
   return (
-    <form className='flex rounded-md items-center bg-gray-800 py-3 px-4 mb-8' onSubmit={(e) => handleSubmit(e,todoInput,checker)}>
+    <form className={mode ? 'flex rounded-md items-center bg-white py-3 px-4 mb-8':'flex rounded-md items-center bg-gray-800 py-3 px-4 mb-8'} onSubmit={(e) => handleSubmit(e,todoInput,checker)}>
          <label className='checker'>
            <input type="checkbox" checked={checker} onChange={e => setChecker(!checker)}/>
            <span>
@@ -27,7 +30,7 @@ export function TodoForm() {
            </span>
         </label>
         <label className='w-full ml-1'>
-           <input placeholder='Create a new todo' className='bg-gray-800 w-full text-white py-1 px-1 outline-none' type="text" value={todoInput} onChange={ e => setTodoInput(e.target.value)}/>
+           <input placeholder='Create a new todo' className={mode ? 'bg-white w-full text-gray-600 py-1 px-1 outline-none':'bg-gray-800 w-full text-white py-1 px-1 outline-none'} type="text" value={todoInput} onChange={ e => setTodoInput(e.target.value)}/>
         </label>
        
     </form>
@@ -38,10 +41,12 @@ export function TodoForm() {
 //This section handles the navigation 
 export function TodoActions(){
   const {todos,activeTodo,completedTodo,clearCompleted} = useContext(formContext)
+  const {mode} = useContext(ThemeContext)
+  const todosLeft = todos.filter(todo => todo.completed === false)
     return(
-        <footer className='  text-white md:rounded-b-md rounded-md'>
-            <ul className='bg-gray-800 grid md:grid-rows-1 grid-cols-12 py-3 px-4  text-sm justify-items-center md:flex md:justify-between rounded-b-md'>
-               <li className='col-start-1 col-end-5  md:col-span-3 inactive'>  {todos.length} items left</li>
+        <footer className='TodoActions'>
+            <ul className={mode?'light-actions TodoActions-main':'dark-actions TodoActions-main'}>
+               <li className='col-start-1 col-end-5  md:col-span-3 inactive'>  {todosLeft.length} items left</li>
                <li className='hidden md:flex items-center'>
                    <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : 'inactive hover:text-white')}>
                       <p >All</p>    
@@ -55,8 +60,7 @@ export function TodoActions(){
                 </li>
                 <li onClick={clearCompleted} className='col-end-13 col-span-5  text-right md:col-span-3 inactive cursor-pointer'>Clear Completed</li>
            </ul>
-           <ul>
-              <nav className='bg-gray-800 flex justify-center md:hidden my-4 py-4 rounded-md'>
+         <nav className={mode?'light-actions TodoActions-sub':'dark-actions TodoActions-sub'}>
                    <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : 'inactive hover:text-white')}>
                       <p >All</p>    
                    </NavLink>
@@ -67,7 +71,7 @@ export function TodoActions(){
                      <p onClick={()=>completedTodo(todos)}>Completed</p>
                    </NavLink>
               </nav>
-           </ul>
+          
         </footer>
     )
 }
@@ -75,13 +79,13 @@ export function TodoActions(){
 
 export function TodoListItem() {
   const {todos,setTodos,handleCompleted} = useContext(formContext)
-
+  const {mode} = useContext(ThemeContext)
   const removeTodo= (id) =>{
     const updatedTodo = todos.filter( todo => todo.id !== id)
     setTodos(updatedTodo)
   }
   return (
-    <section className='TodoList rounded-t-md bg-gray-800 mt-3 text-white'>
+    <section className={mode ? 'TodoList bg-white text-gray-600 mt-3 ':'TodoList bg-gray-800 mt-3 text-white'}>
         <ul >
             {todos.map(todo => (
                 <li key={todo.id} className="py-4 capitalize cursor-pointer">
@@ -107,13 +111,14 @@ export function TodoListItem() {
 
 export function ActiveTodo() {
   const {active,handleCompleted,removeTodo} = useContext(formContext)
+  const {mode} = useContext(ThemeContext)
 
   return (
-    <section className='TodoList rounded-t-md bg-gray-800 mt-3 text-white'>
+    <section className={mode ? 'TodoActive light-active':'TodoActive  dark-active'}>
     <ul >
         {active.length >= 1 ? (
           active.map(todo => (
-            <li key={todo.id} className="border-b-2 py-4 capitalize cursor-pointer">
+            <li key={todo.id} className="py-4 capitalize cursor-pointer">
                <div className='  flex justify-between items-center px-4'>
                  <section className='flex items-center'>
                     <p className={todo.completed ? 'checking checked-complete':'checking checked-incomplete'} 
@@ -140,9 +145,10 @@ export function ActiveTodo() {
 
 export function CompletedTodo() {
   const {complete,handleCompleted} = useContext(formContext)
-
+  const {mode} = useContext(ThemeContext)
+  
   return (
-    <section className='TodoList rounded-t-md bg-gray-800 mt-3 text-white'>
+    <section className={mode ? 'TodoComplete light-complete':'TodoComplete dark-complete'}>
     <ul >
         {complete.length >=1 ? (
           complete.map(todo => (

@@ -1,3 +1,26 @@
 .inactive{
   color: hsl(234, 11%, 52%);
+  @apply font-semibold;
 }
+.light-actions{
+@apply bg-white;
+}
+.dark-actions{
+@apply bg-gray-800;
+}
+.TodoActions{
+    @apply text-white md:rounded-b-md rounded-md;
+}
+.TodoActions-main{
+    @apply grid  md:grid-rows-1 grid-cols-12 py-3 px-4  text-sm justify-items-center md:flex md:justify-between rounded-b-md;
+}
+.TodoActions-sub{
+    @apply flex justify-center md:hidden my-6 py-4 rounded-md shadow-xl;
+}
+.light-actions .inactive{
+    @apply hover:text-gray-800 font-semibold;
+}
+.active{
+    @apply font-bold;
+}
+
