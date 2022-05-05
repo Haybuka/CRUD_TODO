@@ -1,0 +1,17 @@
+.draggable-list{
+    width: 300px;
+    background-color: rgb(194, 51, 51);
+    margin: 0 auto;
+}
+.draggable-list li{
+    margin: 15px 0;
+    padding: 15px 5px;
+    text-align: center;
+}
+.draggable-list li:not(:last-child){
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+/* .draggable-list li.entered{
+    color: #fff;
+    background-color: #000;
+} */

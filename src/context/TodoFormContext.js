@@ -12,7 +12,7 @@ export function TodoFormProvider({children}) {
     
     function handleSetTodo(todoInput,checker,id){
      
-      setTodos([{item:todoInput, completed : checker, id},...todos ])
+      setTodos([{isEdit:false,item:todoInput, completed : checker, id},...todos ])
     
     }
 
@@ -38,7 +38,7 @@ export function TodoFormProvider({children}) {
       setTodos(notCompleted)
     }
   return (
-    <formContext.Provider value={{active,complete,clearCompleted,activeTodo,completedTodo,handleSetTodo,todos,setTodos,handleCompleted}}>
+    <formContext.Provider value={{active,setActive,complete,setComplete,clearCompleted,activeTodo,completedTodo,handleSetTodo,todos,setTodos,handleCompleted}}>
       {children}
     </formContext.Provider>
   )

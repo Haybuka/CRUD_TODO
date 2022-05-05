@@ -3,10 +3,14 @@ import Todo from "./component/todo/Todo";
 import { TodoFormProvider } from "./context/TodoFormContext";
 import { TodoActions, TodoListItem,TodoForm,ActiveTodo,CompletedTodo } from "./component/todo/TodoFile";
 // import UseReduce from "./component/reducer/UseReduce";
+import { DragDropContext } from 'react-beautiful-dnd';
+
+import DragDrop from './component/DragnDrop/DragDrop'
 import { Routes,Route } from "react-router-dom";
 import Header from "./component/todo/Header";
 import './App.css'
 import { ThemeContext } from "./context/ThemeContext";
+
 function App() {
   const {mode} = useContext(ThemeContext)
   return (
@@ -36,3 +40,10 @@ function App() {
 }
 
 export default App;
+
+
+// <>
+// <DragDropContext>
+//   <DragDrop />
+// </DragDropContext>
+// </>

@@ -84,15 +84,41 @@ export function TodoListItem() {
     const updatedTodo = todos.filter( todo => todo.id !== id)
     setTodos(updatedTodo)
   }
+
+  let dragStartIndex;
+
+  const dragStart =(startIndex) =>{
+    dragStartIndex = startIndex
+  }
+  const dragOver = (e,idx) =>{
+    e.preventDefault()
+  }
+  const dropped = (e,endIndex) =>{
+    const dragEndIndex = endIndex
+    swapItems(dragStartIndex,dragEndIndex)
+  }
+  const swapItems = (fromIndex,toIndex) => {
+    const itemOne = todos[fromIndex]
+    const itemTwo = todos[toIndex]
+    const dragA = todos.map((dragItem,index )=> index === toIndex ? {...itemOne}: dragItem)
+    const dragB = dragA.map((dragItem,index)=> index === fromIndex ? {...itemTwo}:dragItem)
+    setTodos(dragB)
+  }
   return (
     <section className={mode ? 'TodoList bg-white text-gray-600 mt-3 ':'TodoList bg-gray-800 mt-3 text-white'}>
         <ul >
-            {todos.map(todo => (
-                <li key={todo.id} className="py-4 capitalize cursor-pointer">
+            {todos.map((todo,index) => (
+                <li 
+                 draggable="true"
+                  onDragStart={()=> dragStart(index)}
+                  onDragOver={(e)=> dragOver(e,index)}
+                  onDrop={(e)=> dropped(e,index)}
+                  key={todo.id} className="py-4 capitalize cursor-pointer"  
+                  >
                    <div className='  flex justify-between items-center px-4'>
-                     <section className='flex items-center'>
+                     <section className='flex items-center' onClick={()=> handleCompleted(todo.id)}>
                         <p className={todo.completed ? 'checking checked-complete':'checking checked-incomplete'} 
-                          onClick={()=> handleCompleted(todo.id)}>{todo.completed}</p>
+                          >{todo.completed}</p>
                         <h4 className='capitalize'> {todo.item} </h4>
                      </section>
                      <p className='block md:hidden cursor-pointer delete-icon'  onClick={ e => removeTodo(todo.id)}>
@@ -110,15 +136,43 @@ export function TodoListItem() {
 
 
 export function ActiveTodo() {
-  const {active,handleCompleted,removeTodo} = useContext(formContext)
+  const {active,setActive,handleCompleted,removeTodo} = useContext(formContext)
   const {mode} = useContext(ThemeContext)
+  
+  // drag and drop starts here
+  let dragStartIndex;
+
+  const dragStart =(startIndex) =>{
+    dragStartIndex = startIndex
+  }
+  const dragOver = (e,idx) =>{
+    e.preventDefault()
+  }
+  const dropped = (e,endIndex) =>{
+    const dragEndIndex = endIndex
+    swapItems(dragStartIndex,dragEndIndex)
+  }
+  const swapItems = (fromIndex,toIndex) => {
+    const itemOne = active[fromIndex]
+    const itemTwo = active[toIndex]
+    const dragA = active.map((dragItem,index )=> index === toIndex ? {...itemOne}: dragItem)
+    const dragB = dragA.map((dragItem,index)=> index === fromIndex ? {...itemTwo}:dragItem)
+    setActive(dragB)
+  }
+
+  // drage and drop ends here
 
   return (
     <section className={mode ? 'TodoActive light-active':'TodoActive  dark-active'}>
     <ul >
         {active.length >= 1 ? (
-          active.map(todo => (
-            <li key={todo.id} className="py-4 capitalize cursor-pointer">
+          active.map((todo,index) => (
+            <li key={todo.id}
+            draggable="true"
+            onDragStart={()=> dragStart(index)}
+            onDragOver={(e)=> dragOver(e,index)}
+            onDrop={(e)=> dropped(e,index)}
+             className="py-4 capitalize cursor-pointer">
                <div className='  flex justify-between items-center px-4'>
                  <section className='flex items-center'>
                     <p className={todo.completed ? 'checking checked-complete':'checking checked-incomplete'} 
@@ -144,15 +198,42 @@ export function ActiveTodo() {
 
 
 export function CompletedTodo() {
-  const {complete,handleCompleted} = useContext(formContext)
+  const {complete,handleCompleted,setComplete} = useContext(formContext)
   const {mode} = useContext(ThemeContext)
   
+    // drag and drop starts here
+    let dragStartIndex;
+
+    const dragStart =(startIndex) =>{
+      dragStartIndex = startIndex
+    }
+    const dragOver = (e,idx) =>{
+      e.preventDefault()
+    }
+    const dropped = (e,endIndex) =>{
+      const dragEndIndex = endIndex
+      swapItems(dragStartIndex,dragEndIndex)
+    }
+    const swapItems = (fromIndex,toIndex) => {
+      const itemOne = complete[fromIndex]
+      const itemTwo = complete[toIndex]
+      const dragA = complete.map((dragItem,index )=> index === toIndex ? {...itemOne}: dragItem)
+      const dragB = dragA.map((dragItem,index)=> index === fromIndex ? {...itemTwo}:dragItem)
+      setComplete(dragB)
+    }
+  
+    // drage and drop ends here
   return (
     <section className={mode ? 'TodoComplete light-complete':'TodoComplete dark-complete'}>
     <ul >
         {complete.length >=1 ? (
-          complete.map(todo => (
-            <li key={todo.id} className="py-4 capitalize cursor-pointer">
+          complete.map((todo,index) => (
+            <li key={todo.id} 
+            draggable="true"
+            onDragStart={()=> dragStart(index)}
+            onDragOver={(e)=> dragOver(e,index)}
+            onDrop={(e)=> dropped(e,index)}
+               className="py-4 capitalize cursor-pointer">
                <div className='  flex justify-between items-center px-4'>
                  <section className='flex items-center'>
                     <p className={todo.completed ? 'checking checked-complete':'checking checked-incomplete'} 
