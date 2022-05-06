@@ -6,40 +6,59 @@ export const formContext = createContext()
 export function TodoFormProvider({children}) {
     
     let [todos,setTodos] = useState([])
-    let [active,setActive] = useState([])
-    let [complete,setComplete] = useState([])
-    //  let [checker,setChecker] = useState(false)
     
+    //CREATE : Data from todo is CREATED here and padded.
     function handleSetTodo(todoInput,checker,id){
      
-      setTodos([{isEdit:false,item:todoInput, completed : checker, id},...todos ])
+      setTodos( [
+        { isEdit:false,
+          item:todoInput,
+          completed : checker, 
+          isActive : checker,
+          todoComplete : checker,
+          id
+        },
+        ...todos ])
     
     }
 
-    function handleCompleted(id){
-      const updateComplete = todos.map( todo => todo.id === id ? {...todo, completed : !todo.completed} : todo)
-     setTodos(updateComplete)
-    }
+    
 
-    function activeTodo(todos){
-      // if(todos.length>=1){
-       const active = todos.filter(todo => todo.completed === false && todo)
-        setActive(active)
-      // }
-    }
 
-    function completedTodo(todos){
-      const completed = todos.filter(todo => todo.completed === true && todo)
-      setComplete(completed)
+    //READ : Reads active and completed todos before they are set on route.
+    let active = todos.filter(todo => todo.completed === false && todo)
+    let complete = todos.filter(todo => todo.completed === true && todo)
+
+
+    //UPDATE : Updates checked item and renders accordingly
+     function handleCompleted(id){
+       const updateComplete = todos.map( todo => todo.id === id ? {...todo, completed : !todo.completed} : todo)
+       console.log('completed handled')
+      setTodos(updateComplete)
+     }
+
+     
+    //DELETE : Handles data deletion from list.
+    
+    const removeTodo= (id) =>{
+      const updatedTodo = todos.filter( todo => todo.id !== id)
+      setTodos(updatedTodo)
     }
+  
+   //DELETE :  Deletes completed items/
 
     function clearCompleted(){
       const notCompleted = todos.filter(todo => todo.completed === false && todo)
       setTodos(notCompleted)
     }
+
+    // FEATURE : Handles order/sort based on drag and drop.
+    const handleDrag = (dragElement) =>{
+      setTodos(dragElement)
+    }
   return (
-    <formContext.Provider value={{active,setActive,complete,setComplete,clearCompleted,activeTodo,completedTodo,handleSetTodo,todos,setTodos,handleCompleted}}>
-      {children}
+    <formContext.Provider value={{active,complete,clearCompleted,removeTodo,handleSetTodo,todos,setTodos,handleCompleted,handleDrag}}>
+       {children}
     </formContext.Provider>
   )
 }

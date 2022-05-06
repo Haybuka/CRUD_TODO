@@ -1,15 +1,12 @@
 import { useContext} from "react";
-import Todo from "./component/todo/Todo";
 import { TodoFormProvider } from "./context/TodoFormContext";
 import { TodoActions, TodoListItem,TodoForm,ActiveTodo,CompletedTodo } from "./component/todo/TodoFile";
 // import UseReduce from "./component/reducer/UseReduce";
-import { DragDropContext } from 'react-beautiful-dnd';
-
-import DragDrop from './component/DragnDrop/DragDrop'
 import { Routes,Route } from "react-router-dom";
-import Header from "./component/todo/Header";
-import './App.css'
 import { ThemeContext } from "./context/ThemeContext";
+import Header from "./component/todo/Header";
+
+import './App.css'
 
 function App() {
   const {mode} = useContext(ThemeContext)
@@ -29,7 +26,7 @@ function App() {
    
                 </Routes>
              </main>
-         <TodoActions />
+             <TodoActions />
              
          </div>
       </TodoFormProvider>
@@ -41,9 +38,3 @@ function App() {
 
 export default App;
 
-
-// <>
-// <DragDropContext>
-//   <DragDrop />
-// </DragDropContext>
-// </>

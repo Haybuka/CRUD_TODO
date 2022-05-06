@@ -2,13 +2,6 @@ import React,{useState} from 'react'
 
 import './drag.css'
 
-let dragStartIndex;
-
-
-function dragOver(e){
-  e.preventDefault()
-  // console.log('drag over')
-}
 
 
 
@@ -24,6 +17,14 @@ function DragDrop() {
     {name : 'item Six',id:5, entered : false},
     ]
   )
+  let dragStartIndex;
+
+
+function dragOver(e){
+  e.preventDefault()
+  // console.log('drag over')
+}
+
   function dragStart(idOne){
     dragStartIndex = idOne
   }
