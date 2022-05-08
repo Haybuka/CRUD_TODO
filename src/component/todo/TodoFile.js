@@ -16,14 +16,17 @@ export function TodoForm() {
   const {mode} = useContext(ThemeContext)
   let [todoInput,setTodoInput] = useState('')
   let [checker,setChecker] = useState(false)
+
+
   const handleSubmit = (e,todoInput,checker) =>{
     e.preventDefault();
   
     handleSetTodo(todoInput,checker,uuid())
     setTodoInput('')
   } 
+
   return (
-    <form className={mode ? 'flex rounded-md items-center bg-white py-3 px-4 mb-8':'flex rounded-md items-center bg-gray-800 py-3 px-4 mb-8'} onSubmit={(e) => handleSubmit(e,todoInput,checker)}>
+    <form className={mode ? 'form bg-white ':'form bg-gray-800'} onSubmit={(e) => handleSubmit(e,todoInput,checker)}>
          <label className='checker'>
            <input type="checkbox" checked={checker} onChange={e => setChecker(!checker)}/>
            <span>
@@ -31,7 +34,9 @@ export function TodoForm() {
            </span>
         </label>
         <label className='w-full ml-1'>
-           <input placeholder='Create a new todo' className={mode ? 'bg-white w-full text-gray-600 py-1 px-1 outline-none':'bg-gray-800 w-full text-white py-1 px-1 outline-none'} type="text" value={todoInput} onChange={ e => setTodoInput(e.target.value)}/>
+           <input placeholder='Create a new todo' 
+           className={mode ? 'bg-white text-gray-600 form-input ':'bg-gray-800 text-white form-input'} 
+           type="text" value={todoInput} onChange={ e => setTodoInput(e.target.value)}/>
         </label>
        
     </form>
@@ -60,7 +65,7 @@ export function TodoActions(){
                      <p >Completed</p>
                    </NavLink>
                 </li>
-                <li onClick={clearCompleted} className='col-end-13 col-span-5  text-right md:col-span-3 inactive cursor-pointer'>Clear Completed</li>
+                <li onClick={clearCompleted} className='clear-completed'>Clear Completed</li>
            </ul>
          <nav className={mode?'light-actions TodoActions-sub':'dark-actions TodoActions-sub'}>
                    <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : 'inactive hover:text-white')}>
@@ -84,6 +89,7 @@ export function TodoListItem() {
   const {todos,setTodos,handleCompleted,removeTodo} = useContext(formContext)
   const {mode} = useContext(ThemeContext)
 
+  //Drag and drop starts here
   let dragStartIndex;
 
   const dragStart =(startIndex) =>{
@@ -103,29 +109,36 @@ export function TodoListItem() {
     const dragB = dragA.map((dragItem,index)=> index === fromIndex ? {...itemTwo}:dragItem)
     setTodos(dragB)
   }
+
+  //Drag and drop ends here
+
   return (
-    <section className={mode ? 'TodoList bg-white text-gray-600 mt-3 ':'TodoList bg-gray-800 mt-3 text-white'}>
+    <section className={mode ? 'TodoList light':'TodoList dark'}>
         <ul >
-            {todos.map((todo,index) => (
+           {todos.length > 0 ? (
+              todos.map((todo,index) => (
                 <li 
                  draggable="true"
                   onDragStart={()=> dragStart(index)}
                   onDragOver={(e)=> dragOver(e,index)}
                   onDrop={(e)=> dropped(e,index)}
-                  key={todo.id} className="py-4 capitalize cursor-pointer"  
+                  key={todo.id} className=""  
                   >
-                   <div className='  flex justify-between items-center px-4'>
-                     <section className='flex items-center' onClick={()=> handleCompleted(todo.id)}>
+                   <div className='justify-between flex-center px-4'>
+                     <section className='flex-center' onClick={()=> handleCompleted(todo.id)}>
                         <p className={todo.completed ? 'checking checked-complete':'checking checked-incomplete'} 
                           >{todo.completed}</p>
                         <h4 className='capitalize'> {todo.item} </h4>
                      </section>
-                     <p className='block md:hidden cursor-pointer delete-icon'  onClick={ e => removeTodo(todo.id)}>
+                     <p className='delete-icon'  onClick={ e => removeTodo(todo.id)}>
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#494C6B" fillRule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg>
                      </p>
                    </div>
                 </li>
-            ))}
+            ))
+           ): (
+             <li className='py-3 px-4'>No tasks added</li>
+           )}
         </ul>
     </section>
   )
@@ -136,8 +149,7 @@ export function TodoListItem() {
 export function ActiveTodo() {
   const {active,handleCompleted,removeTodo} = useContext(formContext)
   const {mode} = useContext(ThemeContext)
-
-
+  
   return (
     <section className={mode ? 'TodoActive light-active':'TodoActive  dark-active'}>
     <ul >
@@ -152,7 +164,7 @@ export function ActiveTodo() {
                     'checking checked-incomplete'} >{todo.completed}</p>
                     <h4 className=''> {todo.item} </h4>
                  </section>
-                 <p className='cursor-pointer'  onClick={ e => removeTodo(todo.id)}>
+                 <p className='md:hidden delete-icon cursor-pointer'  onClick={ e => removeTodo(todo.id)}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#494C6B" fillRule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg>
                  </p>
                </div>
@@ -179,7 +191,6 @@ export function CompletedTodo() {
         {complete.length >=1 ? (
           complete.map((todo,index) => (
             <li key={todo.id} 
-          
                className="py-4 capitalize cursor-pointer">
                <div className='  flex justify-between items-center px-4'>
                  <section className='flex items-center'>
@@ -187,7 +198,7 @@ export function CompletedTodo() {
                       onClick={()=> handleCompleted(todo.id)}>{todo.completed}</p>
                     <h3 className='ml-4'> {todo.item} </h3>
                  </section>
-                 <p className='cursor-pointer' onClick={ e => removeTodo(todo.id)}>
+                 <p className='md:hidden delete-icon cursor-pointer' onClick={ e => removeTodo(todo.id)}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#494C6B" fillRule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg>
                  </p>
                </div>

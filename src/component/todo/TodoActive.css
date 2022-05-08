@@ -1,6 +1,9 @@
 .TodoActive{
     @apply rounded-t-md mt-3 ;
 }
+.TodoActive li:hover .delete-icon{
+    display: block;
+}
 .light-active{
     @apply bg-white text-gray-800 ;
 }

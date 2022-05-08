@@ -1,6 +1,10 @@
 .TodoComplete{
     @apply rounded-t-md mt-3 ;
 }
+
+.TodoComplete li:hover .delete-icon{
+    display: block;
+}
 .light-complete{
 @apply bg-white  text-gray-800;
 }

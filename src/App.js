@@ -1,9 +1,9 @@
 import { useContext} from "react";
 import { TodoFormProvider } from "./context/TodoFormContext";
 import { TodoActions, TodoListItem,TodoForm,ActiveTodo,CompletedTodo } from "./component/todo/TodoFile";
-// import UseReduce from "./component/reducer/UseReduce";
 import { Routes,Route } from "react-router-dom";
 import { ThemeContext } from "./context/ThemeContext";
+// import UseReduce from "./component/reducer/UseReduce";
 import Header from "./component/todo/Header";
 
 import './App.css'
@@ -30,10 +30,13 @@ function App() {
              
          </div>
       </TodoFormProvider>
-      <p className="font-sm text-gray-700 opacity-60 text-center mt-4">Drag and drop to reorder list</p>
+      <p className="instruction">Drag and drop to reorder list</p>
       
     </div>
   );
+  // return(
+  //    <UseReduce />
+  // )
 }
 
 export default App;

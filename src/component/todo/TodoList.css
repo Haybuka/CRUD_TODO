@@ -2,10 +2,20 @@
 .TodoList{
     @apply rounded-t-md mt-3 ;
 }
-
+.TodoList.light{
+    @apply bg-white text-gray-600 ;
+}
+.TodoList.dark{
+    @apply bg-gray-800 text-white;
+}
 .TodoList li{
     border-bottom: 2px solid  hsla(236.8, 14.3%, 26.1%, 0.44);
+    @apply py-4 capitalize cursor-pointer;
 }
+.flex-center{
+    @apply flex items-center;
+}
+
 .TodoList li:hover .checked-incomplete{
   border-top:  1px solid hsl(192, 100%, 67%);
   border-left:  1px solid hsl(192, 100%, 67%);
@@ -15,6 +25,9 @@
 }
 .TodoList li:hover .delete-icon{
     display: block;
+}
+.TodoList .delete-icon{
+    @apply block md:hidden cursor-pointer hover:block;
 }
 .checked-complete{
     background-image: url('../todo/images/icon-check.svg'),linear-gradient(to right, hsl(192, 100%, 67%),  hsl(280, 87%, 65%));

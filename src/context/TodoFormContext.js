@@ -1,12 +1,13 @@
-import React,{createContext,useState} from 'react'
+import React,{createContext,useState,useReducer} from 'react'
 
 
 export const formContext = createContext()
 
+
 export function TodoFormProvider({children}) {
     
     let [todos,setTodos] = useState([])
-    
+
     //CREATE : Data from todo is CREATED here and padded.
     function handleSetTodo(todoInput,checker,id){
      
@@ -37,7 +38,7 @@ export function TodoFormProvider({children}) {
       setTodos(updateComplete)
      }
 
-     
+
     //DELETE : Handles data deletion from list.
     
     const removeTodo= (id) =>{

@@ -1,3 +1,15 @@
+.form{
+    @apply flex rounded-md items-center py-3 px-4 mb-8;
+}
+
+.form-input{
+    @apply py-1 px-1 outline-none w-full;
+}
+
+.clear-completed{
+    @apply col-end-13 col-span-5  text-right md:col-span-3 inactive cursor-pointer;
+}
+
 .checker{
   position: relative;
   margin-right: 10px;
