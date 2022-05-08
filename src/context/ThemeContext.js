@@ -3,7 +3,7 @@ import React,{useState,createContext} from 'react'
 export const ThemeContext = createContext ()
 
 export function ThemeProvider({children}) {
-const [mode,setMode] = useState(true)
+const [mode,setMode] = useState(false)
 const handleMode = () =>{
     setMode(!mode)
 }

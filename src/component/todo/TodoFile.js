@@ -65,7 +65,7 @@ export function TodoActions(){
                      <p >Completed</p>
                    </NavLink>
                 </li>
-                <li onClick={clearCompleted} className='clear-completed'>Clear Completed</li>
+                <li onClick={clearCompleted} className='clear-completed inactive'>Clear Completed</li>
            </ul>
          <nav className={mode?'light-actions TodoActions-sub':'dark-actions TodoActions-sub'}>
                    <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : 'inactive hover:text-white')}>

@@ -5,7 +5,7 @@
  background-size: 100% 32%;
 }
 .instruction{
-  @apply font-sm text-gray-700 opacity-60 text-center mt-4;
+  @apply  text-gray-700 opacity-60 text-center mt-4;
 }
 .contains.dark{
   background-image: url('./component/todo/images/bg-desktop-dark.jpg');
