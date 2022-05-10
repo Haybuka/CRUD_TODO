@@ -9,8 +9,11 @@
     @apply bg-gray-800 text-white;
 }
 .TodoList li{
-    border-bottom: 2px solid  hsla(236.8, 14.3%, 26.1%, 0.44);
     @apply py-4 capitalize cursor-pointer;
+}
+.TodoList li:not(:last-child){
+    border-bottom: 2px solid  hsla(236.8, 14.3%, 26.1%, 0.44);
+    
 }
 .flex-center{
     @apply flex items-center;

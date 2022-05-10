@@ -1,4 +1,5 @@
 import React,{useState,useContext} from 'react'
+import { useLocation,useNavigate } from 'react-router-dom'
 import { formContext} from '../../context/TodoFormContext'
 import {v4 as uuid} from 'uuid'
 import { NavLink } from 'react-router-dom'
@@ -35,6 +36,8 @@ export function TodoForm() {
         </label>
         <label className='w-full ml-1'>
            <input placeholder='Create a new todo' 
+           onFocus={ e => e.target.placeholder = 'Currently typing'}
+           onBlur={ e => e.target.placeholder = 'Create a new todo'}
            className={mode ? 'bg-white text-gray-600 form-input ':'bg-gray-800 text-white form-input'} 
            type="text" value={todoInput} onChange={ e => setTodoInput(e.target.value)}/>
         </label>
@@ -49,7 +52,20 @@ export function TodoForm() {
 export function TodoActions(){
   const {todos,activeTodo,completedTodo,clearCompleted} = useContext(formContext)
   const {mode} = useContext(ThemeContext)
-  const todosLeft = todos.filter(todo => todo.completed === false)
+
+    //to handle items length based on route switch
+  let navigation = useLocation().pathname
+  let todosLeft ;
+
+  if(navigation.includes('active')){
+    todosLeft = todos.filter(todo => todo.completed === false)
+  }else if (navigation.includes('completed')){
+    todosLeft = todos.filter(todo => todo.completed === true)
+  } else {
+    todosLeft = todos
+  }
+  
+  
     return(
         <footer className='TodoActions'>
             <ul className={mode?'light-actions TodoActions-main':'dark-actions TodoActions-main'}>
@@ -65,7 +81,7 @@ export function TodoActions(){
                      <p >Completed</p>
                    </NavLink>
                 </li>
-                <li onClick={clearCompleted} className='clear-completed inactive'>Clear Completed</li>
+                <li onClick={clearCompleted} className='clear-completed inactive hover:text-white'>Clear Completed</li>
            </ul>
          <nav className={mode?'light-actions TodoActions-sub':'dark-actions TodoActions-sub'}>
                    <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : 'inactive hover:text-white')}>

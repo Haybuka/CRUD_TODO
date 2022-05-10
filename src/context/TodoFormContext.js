@@ -7,7 +7,7 @@ export const formContext = createContext()
 export function TodoFormProvider({children}) {
     
     let [todos,setTodos] = useState([])
-
+    
     //CREATE : Data from todo is CREATED here and padded.
     function handleSetTodo(todoInput,checker,id){
      
@@ -22,8 +22,13 @@ export function TodoFormProvider({children}) {
         ...todos ])
     
     }
-
     
+
+    React.useEffect(() => {
+      localStorage.setItem('todos',JSON.stringify(todos))
+     let todoStorage = JSON.parse(localStorage.getItem('todos'))
+       console.log(todoStorage)
+    }, [todos]);
 
 
     //READ : Reads active and completed todos before they are set on route.
@@ -34,7 +39,6 @@ export function TodoFormProvider({children}) {
     //UPDATE : Updates checked item and renders accordingly
      function handleCompleted(id){
        const updateComplete = todos.map( todo => todo.id === id ? {...todo, completed : !todo.completed} : todo)
-       console.log('completed handled')
       setTodos(updateComplete)
      }
 
@@ -57,6 +61,7 @@ export function TodoFormProvider({children}) {
     const handleDrag = (dragElement) =>{
       setTodos(dragElement)
     }
+    
   return (
     <formContext.Provider value={{active,complete,clearCompleted,removeTodo,handleSetTodo,todos,setTodos,handleCompleted,handleDrag}}>
        {children}

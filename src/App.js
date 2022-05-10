@@ -3,7 +3,7 @@ import { TodoFormProvider } from "./context/TodoFormContext";
 import { TodoActions, TodoListItem,TodoForm,ActiveTodo,CompletedTodo } from "./component/todo/TodoFile";
 import { Routes,Route } from "react-router-dom";
 import { ThemeContext } from "./context/ThemeContext";
-// import UseReduce from "./component/reducer/UseReduce";
+import UseReduce from "./component/reducer/UseReduce";
 import Header from "./component/todo/Header";
 
 import './App.css'
