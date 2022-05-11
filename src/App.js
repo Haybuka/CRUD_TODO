@@ -5,11 +5,13 @@ import { Routes,Route } from "react-router-dom";
 import { ThemeContext } from "./context/ThemeContext";
 import UseReduce from "./component/reducer/UseReduce";
 import Header from "./component/todo/Header";
-
+import { useLocation } from "react-router-dom";
 import './App.css'
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const {mode} = useContext(ThemeContext)
+  const location = useLocation()
   return (
     <div className={mode ? 'contains light':'contains dark'}>
       <TodoFormProvider>
@@ -20,12 +22,15 @@ function App() {
                
              <TodoForm />
 
-                <Routes>
+             <AnimatePresence exitBeforeEnter>
+                <Routes location={location} key={location.key}>
                    <Route path="/" element={<TodoListItem />}/>
                    <Route path="active" element={<ActiveTodo />}/>
                    <Route path="completed" element={<CompletedTodo />}/>
    
                 </Routes>
+             </AnimatePresence>
+                
              </main>
              <TodoActions />
              

@@ -6,7 +6,20 @@ export const formContext = createContext()
 
 export function TodoFormProvider({children}) {
     
-    let [todos,setTodos] = useState([])
+    let [todos,setTodos] = useState([
+      { isEdit:false,
+      item:'added item one',
+      completed : true, 
+      isActive : true,
+      todoComplete : true,
+      id : '12ee3'
+    },{ isEdit:false,
+      item:'added item two',
+      completed : true, 
+      isActive : true,
+      todoComplete : true,
+      id : '12ee3f'
+    }])
     
     //CREATE : Data from todo is CREATED here and padded.
     function handleSetTodo(todoInput,checker,id){

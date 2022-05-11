@@ -11,6 +11,17 @@ import './TodoActions.css'
 import './TodoComplete.css'
 import './TodoActive.css'
 
+const ulVariant = {
+  hidden :{x:'-100vw',opacity : 0},
+  visible : {
+    x:0,
+    opacity:1,
+    transition : {
+      // when:'beforeChildren',
+    staggerChildren: 0.5,
+    delayChildren: 0.3,
+   }}
+}
 const listVariant = {
   hidden : {
     y:'-20px',
@@ -20,10 +31,12 @@ const listVariant = {
     y : 0, 
     opacity : 1,
     transition : {
-
+        staggerChildren: 0.5
     }
   }
 }
+
+
 // Form to add tasks to the app
 export function TodoForm() {
  
@@ -143,14 +156,21 @@ export function TodoListItem() {
   //Drag and drop ends here
 
   return (
-    <section className={mode ? 'TodoList light':'TodoList dark'}>
-        <ul >
+    <motion.section exit={{x:'-100vw'}} transition={{ease:'easeInOut'}} className={mode ? 'TodoList light':'TodoList dark'}>
+        <motion.ul 
+          variants={ulVariant}
+           initial='hidden'
+           animate = 'visible'
+
+          
+           >
            {todos.length > 0 ? (
               todos.map((todo,index) => (
                 <motion.li 
                   variants={listVariant}
                   initial="hidden"
                   animate="visible"
+                  
                   draggable="true"
                   onDragStart={()=> dragStart(index)}
                   onDragOver={(e)=> dragOver(e,index)}
@@ -172,8 +192,8 @@ export function TodoListItem() {
            ): (
              <li className='py-3 px-4'>No tasks added</li>
            )}
-        </ul>
-    </section>
+        </motion.ul>
+    </motion.section>
   )
 }
 
@@ -184,7 +204,7 @@ export function ActiveTodo() {
   const {mode} = useContext(ThemeContext)
   
   return (
-    <section className={mode ? 'TodoActive light-active':'TodoActive  bg-primary-550 text-primary-350'}>
+    <motion.section exit={{scale:0,origin:0}} transition={{ease:'easeInOut'}}  className={mode ? 'TodoActive light-active':'TodoActive  bg-primary-550 text-primary-350'}>
     <ul >
         {active.length >= 1 ? (
           active.map((todo,index) => (
@@ -209,7 +229,7 @@ export function ActiveTodo() {
           <li className="p-4"> No active tasks</li>
         )}
     </ul>
-</section>
+    </motion.section>
   )
 }
 
@@ -221,7 +241,7 @@ export function CompletedTodo() {
   const {mode} = useContext(ThemeContext)
 
   return (
-    <section className={mode ? 'TodoComplete light-complete':'TodoComplete dark-complete'}>
+    <motion.section exit={{x:'100vw'}} transition={{ease:'easeInOut'}}  className={mode ? 'TodoComplete light-complete':'TodoComplete dark-complete'}>
     <ul >
         {complete.length >=1 ? (
           complete.map((todo,index) => (
@@ -246,6 +266,6 @@ export function CompletedTodo() {
           <li className="p-4"> No tasks completed</li>
         )}
     </ul>
-</section>
+    </motion.section>
   )
 }
