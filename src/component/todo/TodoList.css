@@ -6,7 +6,8 @@
     @apply bg-white text-gray-600 ;
 }
 .TodoList.dark{
-    @apply bg-gray-800 text-white;
+    @apply bg-primary-550 text-primary-350;
+
 }
 .TodoList li{
     @apply py-4 capitalize cursor-pointer;
@@ -20,11 +21,9 @@
 }
 
 .TodoList li:hover .checked-incomplete{
-  border-top:  1px solid hsl(192, 100%, 67%);
-  border-left:  1px solid hsl(192, 100%, 67%);
-  border-bottom:  1px solid hsl(280, 87%, 65%);
-  border-right:  1px solid hsl(280, 87%, 65%);
   filter: blur(0.5px);
+@apply border-t border-t-primary-650 border-l border-l-primary-650 border-b border-b-primary-700 border-r border-r-primary-700;
+
 }
 .TodoList li:hover .delete-icon{
     display: block;
@@ -34,18 +33,16 @@
 }
 .checked-complete{
     background-image: url('../todo/images/icon-check.svg'),linear-gradient(to right, hsl(192, 100%, 67%),  hsl(280, 87%, 65%));
-    background-position: center;
     background-repeat: no-repeat;
-    border: none;
     transition:  all 0.3s ease-in;
+    @apply bg-no-repeat border-0 bg-center;
 }
 .checked-complete + h4{
-    color: hsl(234, 11%, 52%);
+    @apply border-primary-50 text-primary-450;
 }
 
 .checked-incomplete{
-    
-    border: 1px solid hsl(234, 11%, 52%);
+@apply border-primary-50 border;
 }
 
 .checking{
@@ -62,17 +59,12 @@
 }
 
 .checking + h4::before{
-    position: absolute;
-    top: 60%;
+    @apply absolute top-2/4 left-0 w-0 h-0 bg-primary-50;
     transform: translateY(-50%);
-    left: 0;
-    width: 0%;
-    height: 0%;
-    background-color: hsl(234, 11%, 52%);
     content: '';
     transition: all 0.25s ease-in;
 }
 .checked-complete + h4::before{
     width: 100% !important;
-    height: 5% !important;
+    height: 0.8px !important;
 }

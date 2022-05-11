@@ -22,13 +22,6 @@ export function TodoFormProvider({children}) {
         ...todos ])
     
     }
-    
-
-    React.useEffect(() => {
-      localStorage.setItem('todos',JSON.stringify(todos))
-     let todoStorage = JSON.parse(localStorage.getItem('todos'))
-       console.log(todoStorage)
-    }, [todos]);
 
 
     //READ : Reads active and completed todos before they are set on route.

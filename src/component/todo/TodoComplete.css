@@ -6,12 +6,13 @@
     display: block;
 }
 .light-complete{
-@apply bg-white  text-gray-800;
+@apply bg-white  text-primary-150;
 }
 .dark-complete{
-@apply bg-gray-800 text-white;
+@apply bg-primary-550 text-primary-350;
 }
-.TodoComplete li{
-    border-bottom: 2px solid hsl(237, 14%, 26%);
 
+.TodoComplete li:not(:last-child){
+  @apply border-b-2 border-b-primary-450; 
 }
+

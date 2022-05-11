@@ -11,20 +11,14 @@
 }
 
 .checker{
-  position: relative;
-  margin-right: 10px;
+  @apply relative mr-2;
 }
 .checker span{
-    display: inline-block;
     width: 18px;
     height: 18px;
     border-radius:50% ;
-    position: absolute;
-    left: 0;
-    top: 0;
-    border: 1px solid hsl(234, 11%, 52%);
     transform: translateY(4px);
-    cursor: pointer;
+    @apply cursor-pointer inline-block absolute left-0 top-0 border border-primary-50;
 }
 .checker input{
     transition:  all 0.25s ease-in;
@@ -34,6 +28,5 @@
   
     background-image: url('../todo/images/icon-check.svg'),linear-gradient(to right, hsl(192, 100%, 67%),  hsl(280, 87%, 65%));
     background-position: center;
-    background-repeat: no-repeat;
-    border: none;
+    @apply border-0 bg-no-repeat;
 }

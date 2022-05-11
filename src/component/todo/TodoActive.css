@@ -8,8 +8,8 @@
     @apply bg-white text-gray-800 ;
 }
 .dark-active{
-    @apply bg-gray-800 text-white;
+    /* @apply bg-primary-550 text-primary-0; */
 }
-.TodoActive li{
+.TodoActive li:not(:last-child){
     border-bottom: 2px solid hsl(237, 14%, 26%);
 }

@@ -1,16 +1,15 @@
 .contains{
-  height: 100vh;
   background-position: top;
-  background-repeat: no-repeat;
  background-size: 100% 32%;
+ @apply font-josefin bg-no-repeat h-screen;
 }
 .instruction{
-  @apply  text-gray-400 opacity-60 text-center mt-4;
+  @apply  text-primary-50 opacity-60 text-center mt-4;
 }
 .contains.dark{
   background-image: url('./component/todo/images/bg-desktop-dark.jpg');
-  background-color: rgb(0, 0, 0);
-
+  
+   @apply bg-primary-500;
 }
 .contains.light{
   background-image: url('./component/todo/images/bg-desktop-light.jpg');
@@ -18,7 +17,7 @@
 
 }
 .active{
-  color: hsl(220, 98%, 61%);
+  @apply text-primary-100;
   border: none !important;
   outline: none !important;
 }
@@ -32,9 +31,9 @@
   @apply w-3/4 md:w-3/5 lg:w-2/5 mx-auto py-3;
 }
 
-.contains.light main{
+/* .contains.light main{
   @apply shadow-md;
 }
 .contains.light footer{
   @apply shadow-md;
-}
+} */

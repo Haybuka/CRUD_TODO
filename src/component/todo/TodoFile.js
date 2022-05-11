@@ -27,7 +27,7 @@ export function TodoForm() {
   } 
 
   return (
-    <form className={mode ? 'form bg-white ':'form bg-gray-800'} onSubmit={(e) => handleSubmit(e,todoInput,checker)}>
+    <form className={mode ? 'form bg-white ':'form bg-primary-550'} onSubmit={(e) => handleSubmit(e,todoInput,checker)}>
          <label className='checker'>
            <input type="checkbox" checked={checker} onChange={e => setChecker(!checker)}/>
            <span>
@@ -38,12 +38,12 @@ export function TodoForm() {
            <input placeholder='Create a new todo' 
            onFocus={ e => e.target.placeholder = 'Currently typing'}
            onBlur={ e => e.target.placeholder = 'Create a new todo'}
-           className={mode ? 'bg-white text-gray-600 form-input ':'bg-gray-800 text-white form-input'} 
+           className={mode ? 'bg-white text-gray-600 form-input ':'bg-primary-550 text-primary-0 form-input'} 
            type="text" value={todoInput} onChange={ e => setTodoInput(e.target.value)}/>
         </label>
        
     </form>
-  )
+    )
 }
 
 
@@ -69,7 +69,7 @@ export function TodoActions(){
     return(
         <footer className='TodoActions'>
             <ul className={mode?'light-actions TodoActions-main':'dark-actions TodoActions-main'}>
-               <li className='col-start-1 col-end-5  md:col-span-3 inactive'>  {todosLeft.length} items left</li>
+               <li className='col-start-1 col-end-5  md:col-span-3 font-light text-primary-50 hover:text-primary-0'>  {todosLeft.length} items left</li>
                <li className='hidden md:flex items-center'>
                    <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : 'inactive hover:text-white')}>
                       <p >All</p>    
@@ -81,17 +81,17 @@ export function TodoActions(){
                      <p >Completed</p>
                    </NavLink>
                 </li>
-                <li onClick={clearCompleted} className='clear-completed inactive hover:text-white'>Clear Completed</li>
+                <li onClick={clearCompleted} className='clear-completed font-light text-primary-50 hover:text-primary-0'>Clear Completed</li>
            </ul>
          <nav className={mode?'light-actions TodoActions-sub':'dark-actions TodoActions-sub'}>
                    <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : 'inactive hover:text-white')}>
                       <p >All</p>    
                    </NavLink>
                    <NavLink to="active" className={({ isActive }) => (isActive ? 'active' : 'inactive hover:text-white ')}>
-                     <p onClick={()=>activeTodo(todos)} className='cursor-pointer mx-6 md:mx-6 inline-block'>Active</p>
+                     <p className='cursor-pointer mx-6 md:mx-6 inline-block'>Active</p>
                    </NavLink>
                    <NavLink to="completed" className={({ isActive }) => (isActive ? 'active' : 'inactive hover:text-white')}>
-                     <p onClick={()=>completedTodo(todos)}>Completed</p>
+                     <p>Completed</p>
                    </NavLink>
               </nav>
           
@@ -167,7 +167,7 @@ export function ActiveTodo() {
   const {mode} = useContext(ThemeContext)
   
   return (
-    <section className={mode ? 'TodoActive light-active':'TodoActive  dark-active'}>
+    <section className={mode ? 'TodoActive light-active':'TodoActive  bg-primary-550 text-primary-350'}>
     <ul >
         {active.length >= 1 ? (
           active.map((todo,index) => (
@@ -221,7 +221,7 @@ export function CompletedTodo() {
             </li>
         ))
         ) : (
-          <li className="p-4"> No items completed</li>
+          <li className="p-4"> No tasks completed</li>
         )}
     </ul>
 </section>
