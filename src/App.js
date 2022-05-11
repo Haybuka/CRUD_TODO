@@ -27,7 +27,7 @@ function App() {
                    <Route path="/" element={<TodoListItem />}/>
                    <Route path="active" element={<ActiveTodo />}/>
                    <Route path="completed" element={<CompletedTodo />}/>
-   
+                    <Route path="*" element={<TodoListItem />} />
                 </Routes>
              </AnimatePresence>
                 
