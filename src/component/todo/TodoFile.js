@@ -4,12 +4,26 @@ import { formContext} from '../../context/TodoFormContext'
 import {v4 as uuid} from 'uuid'
 import { NavLink } from 'react-router-dom'
 import { ThemeContext } from '../../context/ThemeContext'
+import { motion } from 'framer-motion'
 import './TodoForm.css'
 import './TodoList.css'
 import './TodoActions.css'
 import './TodoComplete.css'
 import './TodoActive.css'
 
+const listVariant = {
+  hidden : {
+    y:'-20px',
+    opacity: 0
+  },
+  visible :{
+    y : 0, 
+    opacity : 1,
+    transition : {
+
+    }
+  }
+}
 // Form to add tasks to the app
 export function TodoForm() {
  
@@ -133,8 +147,11 @@ export function TodoListItem() {
         <ul >
            {todos.length > 0 ? (
               todos.map((todo,index) => (
-                <li 
-                 draggable="true"
+                <motion.li 
+                  variants={listVariant}
+                  initial="hidden"
+                  animate="visible"
+                  draggable="true"
                   onDragStart={()=> dragStart(index)}
                   onDragOver={(e)=> dragOver(e,index)}
                   onDrop={(e)=> dropped(e,index)}
@@ -150,7 +167,7 @@ export function TodoListItem() {
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#494C6B" fillRule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg>
                      </p>
                    </div>
-                </li>
+                </motion.li>
             ))
            ): (
              <li className='py-3 px-4'>No tasks added</li>
@@ -171,8 +188,10 @@ export function ActiveTodo() {
     <ul >
         {active.length >= 1 ? (
           active.map((todo,index) => (
-            <li key={todo.id}
-           
+            <motion.li key={todo.id}
+            variants={listVariant}
+            initial="hidden"
+            animate="visible"
              className="py-4 capitalize cursor-pointer">
                <div className='  flex justify-between items-center px-4'>
                  <section className='flex items-center' onClick={()=> handleCompleted(todo.id)}>
@@ -184,7 +203,7 @@ export function ActiveTodo() {
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#494C6B" fillRule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg>
                  </p>
                </div>
-            </li>
+            </motion.li>
         ))
         ): (
           <li className="p-4"> No active tasks</li>
@@ -206,7 +225,10 @@ export function CompletedTodo() {
     <ul >
         {complete.length >=1 ? (
           complete.map((todo,index) => (
-            <li key={todo.id} 
+            <motion.li key={todo.id} 
+            variants={listVariant}
+            initial="hidden"
+            animate="visible"
                className="py-4 capitalize cursor-pointer">
                <div className='  flex justify-between items-center px-4'>
                  <section className='flex items-center'>
@@ -218,7 +240,7 @@ export function CompletedTodo() {
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#494C6B" fillRule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg>
                  </p>
                </div>
-            </li>
+            </motion.li>
         ))
         ) : (
           <li className="p-4"> No tasks completed</li>
