@@ -8,17 +8,29 @@ export function TodoFormProvider({children}) {
     
     let [todos,setTodos] = useState([
       { isEdit:false,
-      item:'added item one',
+      item:'Complete online javascript course',
       completed : true, 
       isActive : true,
       todoComplete : true,
       id : '12ee3'
     },{ isEdit:false,
-      item:'added item two',
+      item:'Jog around the park 3x',
       completed : true, 
       isActive : true,
       todoComplete : true,
+      id : '12ee3few'
+    },{ isEdit:false,
+      item:'10 minutes meditation',
+      completed : false, 
+      isActive : false,
+      todoComplete : false,
       id : '12ee3f'
+    },{ isEdit:false,
+      item:'Complete todo app ',
+      completed : true, 
+      isActive : true,
+      todoComplete : true,
+      id : '12ee3fwe3'
     }])
     
     //CREATE : Data from todo is CREATED here and padded.

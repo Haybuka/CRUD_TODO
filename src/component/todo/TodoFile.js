@@ -175,7 +175,7 @@ export function TodoListItem() {
                   onDragStart={()=> dragStart(index)}
                   onDragOver={(e)=> dragOver(e,index)}
                   onDrop={(e)=> dropped(e,index)}
-                  key={todo.id} className=""  
+                  key={todo.id} className="text-md md:text-xl"  
                   >
                    <div className='justify-between flex-center px-4'>
                      <section className='flex-center' onClick={()=> handleCompleted(todo.id)}>
