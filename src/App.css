@@ -28,7 +28,7 @@
 
 
 .Todo{
-  @apply w-3/4 md:w-3/5 lg:w-2/5 mx-auto py-3;
+  @apply w-auto mx-4 md:w-3/5 lg:w-2/5 md:mx-auto py-3;
 }
 
 /* .contains.light main{
